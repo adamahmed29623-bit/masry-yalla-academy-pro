@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "أكاديمية يلا مصري | Yalla Masry Academy",
-  description: "بوابة الرقي والفخامة لتعليم اللهجة المصرية",
+  description: "بوابة الرقي والفخامة",
 };
 
 export default function RootLayout({
@@ -13,26 +13,19 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <head>
-        {/* نستخدم خطوط النظام الأساسية لضمان السرعة القصوى مع الحفاظ على الأناقة */}
+        {/* ربط مكتبة الأيقونات مباشرة عبر CDN (مثل نظام الفاير بيس) */}
+        <script src="https://unpkg.com/lucide@latest"></script>
         <style>{`
           body {
             margin: 0;
-            padding: 0;
-            background-color: #000814; /* الأسود الملكي العميق */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-          }
-          /* تأمين التدرج اللوني في حال تأخر ملف الـ CSS */
-          .royal-bg {
-            background: radial-gradient(circle at center, #001d3d 0%, #000814 100%);
-            min-height: 100vh;
+            background-color: #000814;
+            color: white;
+            font-family: sans-serif;
           }
         `}</style>
       </head>
       <body>
-        <div className="royal-bg">
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   );
