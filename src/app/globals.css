@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 8, 20; /* الكحلي الملكي العميق */
+  --background-end-rgb: 0, 0, 0;    /* الأسود الفاخر */
+}
+
+/* تنسيق الخطوط والمظهر العام لضمان رقي العرض */
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif; /* أو أي خط تفضلينه لاحقاً */
+}
+
+/* تنعيم حركات الانتقال داخل الأكاديمية */
+* {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+/* لمسة ذهبية خاصة للروابط والأزرار */
+::selection {
+  background-color: #f59e0b; /* لون العنبر الذهبي */
+  color: #000;
+}
