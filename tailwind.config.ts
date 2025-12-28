@@ -1,6 +1,5 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+const config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,7 +8,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // تعريف الألوان الملكية لتتعرف عليها كل الصفحات
         'royal-blue': '#001d3d',
         'deep-navy': '#000814',
         'gold-accent': '#ffc300',
@@ -18,4 +16,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
