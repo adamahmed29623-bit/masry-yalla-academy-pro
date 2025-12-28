@@ -1,45 +1,37 @@
 import type { Metadata } from "next";
-import { Inter, Amiri } from "next/font/google"; // دمج خط عصري مع خط عربي أصيل
 import "./globals.css";
 
-// إعداد الخطوط الملكية
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const amiri = Amiri({ 
-  subsets: ["arabic"], 
-  weight: ["400", "700"], 
-  variable: "--font-amiri" 
-});
-
+// معلومات الأكاديمية للمتصفحات (SEO الملكي)
 export const metadata: Metadata = {
-  title: "أكاديمية يلا مصري | Yalla Masry Academy",
-  description: "المنصة الإمبراطورية لتعليم اللهجة المصرية والرقي الثقافي للملكات والبراعم",
+  title: "أكاديمية يلا مصري | العراقة والرقي",
+  description: "المنصة الأولى لتعليم اللهجة المصرية بأسلوب ملوكي فاخر",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="ar" dir="rtl">
-      <body
-        className={`${inter.variable} ${amiri.variable} font-sans antialiased bg-[#000814] text-white`}
+      <head>
+        {/* إضافة خطوط ملكية لضمان مظهر احترافي */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@200..1000&display=swap" rel="stylesheet" />
+      </head>
+      <body 
+        style={{ 
+          margin: 0, 
+          padding: 0, 
+          minHeight: '100vh',
+          background: '#000814' // اللون الأسود العميق لضمان عدم ظهور بياض أثناء التحميل
+        }}
       >
-        {/* تأثير الوهج الذهبي الثابت في الخلفية ليعطي عمقاً فخماً لكل الصفحات */}
-        <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-amber-500/5 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-sky-500/5 rounded-full blur-[120px]" />
-        </div>
-
-        {/* محتوى الصفحة الرئيسي */}
-        <div className="relative z-10">
+        {/* الحاوية الرئيسية التي تضمن تطبيق الألوان في كل الصفحات */}
+        <div className="royal-wrapper">
           {children}
         </div>
-
-        {/* تذييل بسيط مخفي يظهر في الطباعة أو الأرشفة */}
-        <footer className="sr-only">
-          جميع الحقوق محفوظة لأكاديمية يلا مصري 2025 ©
-        </footer>
       </body>
     </html>
   );
