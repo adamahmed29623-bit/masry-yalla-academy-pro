@@ -1,35 +1,59 @@
 "use client";
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
-  // تفعيل الأيقونات فور تحميل الصفحة
-  useEffect(() => {
-    if (window.lucide) {
-      window.lucide.createIcons();
-    }
-  }, []);
+  const router = useRouter();
+
+  const sections = [
+    { title: "رواق المعلمات", path: "/teachers", desc: "نخبة الصفوة لتعليمكِ" },
+    { title: "ديوان التحديات", path: "/challenges", desc: "اختبري مهاراتكِ الملكية" },
+    { title: "لوحة التحكم", path: "/dashboard", desc: "تابعي تقدمكِ يا سمو الأميرة" },
+    { title: "ديوان القرآن", path: "/quran", desc: "بركة الأكاديمية ونورها" }
+  ];
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center text-center" style={{ background: 'radial-gradient(circle, #001d3d 0%, #000814 100%)' }}>
-      
-      <div className="mb-8">
-        {/* نستخدم الأيقونات هنا بأسماء بسيطة وستتحول لتيجان ذهبية */}
-        <i data-lucide="crown" style={{ width: '80px', height: '80px', color: '#ffc300' }}></i>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'radial-gradient(circle at center, #001d3d 0%, #000814 100%)', 
+      color: 'white', 
+      direction: 'rtl',
+      fontFamily: 'sans-serif',
+      padding: '40px 20px'
+    }}>
+      {/* الشعار الملكي بسيط ومستقل */}
+      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <div style={{ fontSize: '50px', marginBottom: '10px' }}>👑</div>
+        <h1 style={{ fontSize: '3rem', fontWeight: '900', fontStyle: 'italic', margin: '0' }}>أكاديمية يلا مصري</h1>
+        <p style={{ color: '#ffc300', fontSize: '1.5rem', fontWeight: 'bold', marginTop: '10px' }}>حيث يبدأ رقي "نوف"</p>
       </div>
 
-      <h1 className="text-6xl font-black italic text-white mb-4">أكاديمية يلا مصري</h1>
-      <p className="text-[#ffc300] text-xl font-bold tracking-widest italic mb-10">بوابة "نوف" للرقي المصري</p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl px-6">
-        <button className="bg-white/5 border border-amber-500/20 p-6 rounded-3xl flex items-center gap-4 hover:bg-amber-500/10 transition-all">
-          <i data-lucide="graduation-cap" style={{ color: '#ffc300' }}></i>
-          <span className="text-xl font-bold">رواق المعلمات</span>
-        </button>
-        
-        <button className="bg-white/5 border border-amber-500/20 p-6 rounded-3xl flex items-center gap-4 hover:bg-amber-500/10 transition-all">
-          <i data-lucide="trophy" style={{ color: '#ffc300' }}></i>
-          <span className="text-xl font-bold">ديوان التحديات</span>
-        </button>
+      {/* شبكة الأقسام */}
+      <div style={{ 
+        maxWidth: '1000px', 
+        margin: '0 auto', 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+        gap: '25px' 
+      }}>
+        {sections.map((sec, i) => (
+          <div 
+            key={i}
+            onClick={() => router.push(sec.path)}
+            style={{ 
+              background: 'rgba(255, 255, 255, 0.05)', 
+              border: '1px solid rgba(255, 195, 0, 0.2)', 
+              padding: '35px', 
+              borderRadius: '40px', 
+              cursor: 'pointer',
+              textAlign: 'center',
+              transition: '0.3s'
+            }}
+          >
+            <h3 style={{ fontSize: '1.8rem', fontWeight: '900', marginBottom: '10px' }}>{sec.title}</h3>
+            <p style={{ color: '#94a3b8', fontStyle: 'italic' }}>{sec.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
