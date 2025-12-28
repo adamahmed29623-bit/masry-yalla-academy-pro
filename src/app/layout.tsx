@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
 
-// معلومات الأكاديمية للمتصفحات (SEO الملكي)
 export const metadata: Metadata = {
-  title: "أكاديمية يلا مصري | العراقة والرقي",
-  description: "المنصة الأولى لتعليم اللهجة المصرية بأسلوب ملوكي فاخر",
+  title: "أكاديمية يلا مصري | Yalla Masry Academy",
+  description: "بوابة الرقي والفخامة لتعليم اللهجة المصرية",
 };
 
 export default function RootLayout({
@@ -15,21 +13,24 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <head>
-        {/* إضافة خطوط ملكية لضمان مظهر احترافي */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@200..1000&display=swap" rel="stylesheet" />
+        {/* نستخدم خطوط النظام الأساسية لضمان السرعة القصوى مع الحفاظ على الأناقة */}
+        <style>{`
+          body {
+            margin: 0;
+            padding: 0;
+            background-color: #000814; /* الأسود الملكي العميق */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+          }
+          /* تأمين التدرج اللوني في حال تأخر ملف الـ CSS */
+          .royal-bg {
+            background: radial-gradient(circle at center, #001d3d 0%, #000814 100%);
+            min-height: 100vh;
+          }
+        `}</style>
       </head>
-      <body 
-        style={{ 
-          margin: 0, 
-          padding: 0, 
-          minHeight: '100vh',
-          background: '#000814' // اللون الأسود العميق لضمان عدم ظهور بياض أثناء التحميل
-        }}
-      >
-        {/* الحاوية الرئيسية التي تضمن تطبيق الألوان في كل الصفحات */}
-        <div className="royal-wrapper">
+      <body>
+        <div className="royal-bg">
           {children}
         </div>
       </body>
