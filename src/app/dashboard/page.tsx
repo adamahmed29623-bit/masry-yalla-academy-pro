@@ -1,117 +1,81 @@
+
 "use client";
 import React, { useState } from 'react';
-import { Crown, ShoppingBag, Flame, Award, Sparkles, UserCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  LayoutDashboard, Users, BookOpen, Calendar, 
+  Settings, Bell, Search, Plus, Star, Crown 
+} from 'lucide-react';
 
-export default function RoyalDashboard() {
-  const [points] = useState(2450);
-  const userTitle = "نفرتاري"; 
-  const currentRank = "مرشدة ملكية";
-
-  const badges = [
-    { name: "فرعونة صغيرة", status: "unlocked", icon: "🌱" },
-    { name: "مرشدة ملكية", status: "active", icon: "📜" },
-    { name: "وصيفة", status: "locked", icon: "🏺" },
-    { name: "ملكة", status: "locked", icon: "👑" }
-  ];
+export default function TeacherDashboard() {
+  const [activeSlide, setActiveSlide] = useState('stats');
 
   return (
-    <div className="min-h-screen bg-transparent text-white p-4 md:p-10 font-sans">
-      {/* Header: الترحيب واللقب */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
-        <div className="lg:col-span-3 bg-white/5 border border-white/10 rounded-[3rem] p-8 flex flex-col md:flex-row items-center gap-8 backdrop-blur-md">
-          <div className="relative">
-            <div className="w-32 h-32 rounded-full border-4 border-amber-500 p-1">
-              <div className="w-full h-full rounded-full bg-gradient-to-b from-amber-500/20 to-transparent flex items-center justify-center">
-                <UserCircle size={60} className="text-amber-500" />
-              </div>
-            </div>
-            <div className="absolute -bottom-2 -right-2 bg-amber-500 text-black p-2 rounded-full shadow-lg">
-              <Crown size={16} />
-            </div>
-          </div>
-          <div className="text-center md:text-right">
-            <h1 className="text-3xl md:text-4xl font-black italic">
-              أهلاً بكِ، يا سمو الأميرة <span className="text-amber-500">{userTitle}</span>
-            </h1>
-            <p className="text-slate-400 mt-2 font-medium italic flex items-center justify-center md:justify-start gap-2">
-              <Sparkles size={16} className="text-amber-500" /> أنتِ الآن برتبة: {currentRank}
-            </p>
-          </div>
+    <div className="min-h-screen bg-[#000814] text-white flex font-sans">
+      
+      {/* القائمة الجانبية للوحة التحكم */}
+      <aside className="w-64 bg-[#001d3d] border-l border-white/5 p-8 flex flex-col gap-10">
+        <div className="flex items-center gap-3 text-amber-500 font-black italic">
+          <Crown size={24} /> ديوان الإدارة
         </div>
+        
+        <nav className="space-y-4">
+          {[
+            { id: 'stats', label: 'الإحصائيات', icon: LayoutDashboard },
+            { id: 'lessons', label: 'إدارة الدروس', icon: BookOpen },
+            { id: 'students', label: 'قائمة الملكات', icon: Users },
+            { id: 'schedule', label: 'الجدول الزمني', icon: Calendar },
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveSlide(item.id)}
+              className={`w-full flex items-center gap-4 px-4 py-3 rounded-2xl font-bold transition-all ${
+                activeSlide === item.id ? 'bg-amber-500 text-[#000814]' : 'text-slate-400 hover:bg-white/5'
+              }`}
+            >
+              <item.icon size={20} /> {item.label}
+            </button>
+          ))}
+        </nav>
+      </aside>
 
-        <div className="bg-amber-500 text-black rounded-[3rem] p-6 flex flex-col justify-center items-center text-center shadow-xl">
-          <p className="font-black italic text-sm mb-2 uppercase">رسالة اليوم</p>
-          <p className="font-bold text-xs italic">"فصاحتكِ يا {userTitle} هي مفتاح القلوب، استمري!"</p>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8">
-          {/* مسار الترقي */}
-          <div className="bg-white/5 border border-white/10 rounded-[3rem] p-10 backdrop-blur-sm">
-            <h2 className="text-xl font-black italic mb-10 flex items-center gap-3 text-amber-500">
-              <Award size={24} /> مسار الترقي الفرعوني
-            </h2>
-            <div className="flex justify-between items-center relative mb-12 px-4">
-              <div className="absolute top-1/2 left-0 w-full h-1 bg-white/10 -translate-y-1/2"></div>
-              {badges.map((badge, i) => (
-                <div key={i} className="relative z-10 flex flex-col items-center">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-xl transition-all ${badge.status === 'locked' ? 'bg-slate-800' : 'bg-amber-500 text-black shadow-amber-500/20'}`}>
-                    {badge.icon}
-                  </div>
-                  <p className="text-[10px] mt-3 font-black text-slate-400 uppercase tracking-tighter text-center">
-                    {badge.name}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* الدروس */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
-              <div className="bg-white/5 p-6 rounded-[2rem] border-r-4 border-amber-500 hover:bg-white/10 transition-all">
-                <p className="text-[10px] font-black text-amber-500 mb-2 uppercase tracking-widest">الدرس الحالي</p>
-                <h4 className="font-bold italic text-lg mb-4 text-white">فن المديح والترحيب المصري</h4>
-                <button className="text-xs bg-amber-500 text-black px-6 py-2 rounded-full font-black">مواصلة التعليم</button>
-              </div>
-              <div className="bg-white/5 p-6 rounded-[2rem] opacity-50 hover:opacity-100 transition-all">
-                <p className="text-[10px] font-black text-slate-500 mb-2 uppercase">آخر درس مكتمل</p>
-                <h4 className="font-bold italic text-lg mb-4 text-white">مخارج الحروف الملكية</h4>
-                <button className="text-xs border border-white/20 px-6 py-2 rounded-full font-black text-white">مراجعة</button>
-              </div>
-            </div>
+      {/* المحتوى المتغير بناءً على الشريحة المختارة */}
+      <main className="flex-1 p-12 overflow-y-auto">
+        <header className="flex justify-between items-center mb-12">
+          <h2 className="text-4xl font-black italic">أهلاً بكِ، يا فخر الأكاديمية</h2>
+          <div className="flex gap-4">
+             <div className="bg-[#001d3d] p-3 rounded-full border border-white/5"><Bell size={20}/></div>
+             <div className="bg-amber-500 w-12 h-12 rounded-full border-2 border-white/10 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1544717297-fa95b3ee51f3?w=100" alt="Admin" />
+             </div>
           </div>
-        </div>
+        </header>
 
-        {/* الجانب المالي/النقاط */}
-        <div className="space-y-8">
-          <div className="bg-gradient-to-br from-amber-500 to-amber-600 text-black rounded-[3rem] p-10 shadow-2xl relative overflow-hidden group">
-            <div className="relative z-10">
-              <p className="font-black uppercase tracking-widest text-[10px] opacity-70">رصيدك من نقاط الرقي</p>
-              <h3 className="text-6xl font-black italic my-2 tracking-tighter">{points}</h3>
-              <p className="font-bold italic text-xs">تُعادل مكافآت قيمة في المتجر</p>
+        {activeSlide === 'stats' && (
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-[#001d3d] p-8 rounded-[3rem] border border-white/5">
+              <Star className="text-amber-500 mb-4" />
+              <div className="text-slate-500 font-bold italic">إجمالي الطالبات</div>
+              <div className="text-5xl font-black mt-2">1,250</div>
             </div>
-            <Flame className="absolute -bottom-4 -right-4 opacity-10 group-hover:scale-110 transition-transform" size={120} />
-          </div>
+            {/* أضيفي المزيد من البطاقات هنا بناءً على شرائحكِ */}
+          </motion.div>
+        )}
 
-          <div className="bg-white/5 border border-white/10 rounded-[3rem] p-8 backdrop-blur-xl">
-            <h2 className="text-xl font-black italic mb-6 flex items-center gap-2 text-amber-500">
-              <ShoppingBag size={20} /> المقايضة الملكية
-            </h2>
-            <div className="space-y-4">
-              <div className="p-4 bg-white/5 rounded-2xl border border-white/5 flex justify-between items-center group hover:border-amber-500/30 transition-all">
-                <div>
-                  <p className="font-bold text-sm text-white">وشاح الأكاديمية</p>
-                  <p className="text-[10px] text-amber-500 font-bold">١٥٠٠ نقطة</p>
-                </div>
-                <button className="bg-white/10 px-4 py-2 rounded-xl text-[10px] font-black hover:bg-amber-500 hover:text-black transition-all text-white">
-                  استبدال
-                </button>
-              </div>
+        {activeSlide === 'lessons' && (
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
+            <div className="flex justify-between items-center">
+              <h3 className="text-2xl font-black italic">إدارة منهج رحلة نوف</h3>
+              <button className="bg-amber-500 text-[#000814] px-6 py-3 rounded-xl font-black flex items-center gap-2">
+                <Plus size={20}/> إضافة درس جديد
+              </button>
             </div>
-            <p className="text-[9px] text-center text-slate-500 italic mt-6">تُطبق الشروط والأحكام الملكية</p>
-          </div>
-        </div>
-      </div>
+            <div className="bg-[#001d3d] rounded-[3rem] border border-white/5 p-8">
+               <p className="text-slate-500 italic">هنا يتم عرض تسلسل الدروس والملفات المرفقة...</p>
+            </div>
+          </motion.div>
+        )}
+      </main>
     </div>
   );
 }
