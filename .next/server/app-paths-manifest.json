@@ -1,0 +1,21 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/acadmey/page": "app/acadmey/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/booking/page": "app/booking/page.js",
+  "/challenges/page": "app/challenges/page.js",
+  "/classroom/page": "app/classroom/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/goals/page": "app/goals/page.js",
+  "/gulf-wing/page": "app/gulf-wing/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/parent-dashboard/page": "app/parent-dashboard/page.js",
+  "/quran-hall/page": "app/quran-hall/page.js",
+  "/signup/page": "app/signup/page.js",
+  "/store/page": "app/store/page.js",
+  "/student-dashboard/page": "app/student-dashboard/page.js",
+  "/teachers/profile/page": "app/teachers/profile/page.js",
+  "/welcome/page": "app/welcome/page.js"
+}
