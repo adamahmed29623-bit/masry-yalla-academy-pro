@@ -1,92 +1,134 @@
 "use client";
-import React from 'react';
-import { Crown, Star, BookOpen, Trophy, Settings, Bell, Flame } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { Crown, Star, BookOpen, Trophy, ShoppingBag, Flame, ChevronRight, Award, Sparkles, UserCircle } from 'lucide-react';
 
-export default function StudentDashboard() {
-  const router = useRouter();
+export default function RoyalDashboard() {
+  // بيانات افتراضية تعكس روح الأكاديمية
+  const [points, setPoints] = useState(2450);
+  const userTitle = "نفرتاري"; // الاسم المستعار المختار
+  const currentRank = "مرشدة ملكية"; // الرتبة الحالية
 
-  // بيانات افتراضية للطالبة
-  const stats = [
-    { label: "المستوى", value: "الأميرة", icon: <Crown className="text-amber-500" /> },
-    { label: "نقاط الرقي", value: "١,٢٥٠", icon: <Star className="text-amber-500" /> },
-    { label: "التحديات", value: "١٢/١٥", icon: <Trophy className="text-amber-500" /> },
-    { label: "سلسلة التعلم", value: "٧ أيام", icon: <Flame className="text-orange-500" /> }
+  const badges = [
+    { name: "فرعونة صغيرة", status: "unlocked", icon: "🌱" },
+    { name: "مرشدة ملكية", status: "active", icon: "📜" },
+    { name: "وصيفة", status: "locked", icon: "🏺" },
+    { name: "ملكة", status: "locked", icon: "👑" }
   ];
 
   return (
-    <div className="min-h-screen bg-transparent text-white p-6 md:p-12">
-      {/* الـ Header الخاص بلوحة التحكم */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
-        <div>
-          <h1 className="text-4xl font-black italic flex items-center gap-4">
-            أهلاً بكِ، يا سمو الأميرة <span className="text-amber-500">نوف</span>
-          </h1>
-          <p className="text-slate-400 mt-2 font-medium italic">تابعي رحلتكِ نحو إتقان الفن المصري الراقي</p>
-        </div>
-        <div className="flex gap-4">
-          <button className="bg-white/5 p-4 rounded-2xl border border-white/10 hover:bg-white/10 transition-all relative">
-            <Bell size={24} />
-            <span className="absolute top-3 right-3 w-2 h-2 bg-amber-500 rounded-full"></span>
-          </button>
-          <button onClick={() => router.push('/settings')} className="bg-white/5 p-4 rounded-2xl border border-white/10 hover:bg-white/10 transition-all">
-            <Settings size={24} />
-          </button>
-        </div>
-      </div>
-
-      {/* إحصائيات سريعة */}
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-        {stats.map((stat, index) => (
-          <div key={index} className="bg-white/5 border border-white/10 p-6 rounded-[2rem] backdrop-blur-sm shadow-xl">
-            <div className="mb-4">{stat.icon}</div>
-            <p className="text-3xl font-black italic">{stat.value}</p>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">{stat.label}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* القسم الرئيسي: الدروس والتحديات */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
-        
-        {/* الدروس الحالية */}
-        <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-2xl font-black italic flex items-center gap-3">
-            <BookOpen className="text-amber-500" /> متابعة التعلم
-          </h2>
-          <div className="bg-gradient-to-r from-amber-500/20 to-transparent border border-amber-500/20 p-8 rounded-[2.5rem] relative overflow-hidden group hover:scale-[1.01] transition-all">
-            <div className="relative z-10">
-              <h3 className="text-2xl font-bold mb-2">أساسيات الحديث في المجالس الراقية</h3>
-              <p className="text-slate-400 mb-6 italic">الدرس الثالث: نبرة الصوت واستخدام المصطلحات الملكية</p>
-              <div className="w-full bg-white/10 h-2 rounded-full mb-6">
-                <div className="bg-amber-500 h-full w-[65%] rounded-full shadow-[0_0_15px_rgba(245,158,11,0.5)]"></div>
-              </div>
-              <button className="bg-amber-500 text-black px-8 py-3 rounded-xl font-black text-lg hover:shadow-lg transition-all">مواصلة التعلم</button>
+    <div className="min-h-screen bg-transparent text-white p-4 md:p-10">
+      {/* Header: الترحيب والأفاتار */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
+        <div className="lg:col-span-3 bg-white/5 border border-white/10 rounded-[3rem] p-8 flex items-center gap-8 backdrop-blur-md">
+          <div className="relative">
+            <div className="w-32 h-32 rounded-full border-4 border-amber-500 p-1">
+               <div className="w-full h-full rounded-full bg-gradient-to-b from-amber-500/20 to-transparent flex items-center justify-center">
+                  <UserCircle size={60} className="text-amber-500" />
+               </div>
             </div>
-            <Crown className="absolute -bottom-10 -right-10 text-amber-500/10" size={180} />
+            <div className="absolute -bottom-2 -right-2 bg-amber-500 text-black p-2 rounded-full">
+              <Crown size={16} />
+            </div>
+          </div>
+          <div>
+            <h1 className="text-4xl font-black italic">أهلاً بكِ، يا سمو الأميرة <span className="text-amber-500">{userTitle}</span></h1>
+            <p className="text-slate-400 mt-2 font-medium italic flex items-center gap-2">
+              <Sparkles size={16} className="text-amber-500" /> أنتِ الآن برتبة: {currentRank}
+            </p>
           </div>
         </div>
 
-        {/* قائمة التحديات السريعة */}
-        <div className="space-y-6">
-          <h2 className="text-2xl font-black italic flex items-center gap-3">
-            <Trophy className="text-amber-500" /> تحديات اليوم
-          </h2>
-          <div className="space-y-4">
-            {['تحدي النطق السليم', 'اختبار مفردات القصور', 'تحدي المحادثة الحية'].map((challenge, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center justify-between group hover:bg-white/10 transition-all cursor-pointer">
-                <span className="font-bold italic">{challenge}</span>
-                <div className="w-8 h-8 rounded-full border border-amber-500/50 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-black transition-all">
-                   {i === 0 ? '✓' : i + 1}
+        {/* أفاتار التشجيع (الملكة حتشبسوت المصغرة) */}
+        <div className="bg-amber-500 text-black rounded-[3rem] p-6 flex flex-col justify-center items-center text-center shadow-[0_20px_40px_rgba(255,195,0,0.2)]">
+          <p className="font-black italic text-sm mb-2">"رسالة اليوم"</p>
+          <p className="font-bold text-xs italic">"فصاحتكِ يا {userTitle} هي مفتاح القلوب، استمري!"</p>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        {/* العمود الأول: الدروس والمستوى */}
+        <div className="lg:col-span-2 space-y-8">
+          {/* شريط التقدم والرتب */}
+          <div className="bg-white/5 border border-white/10 rounded-[3rem] p-10">
+            <h2 className="text-xl font-black italic mb-8 flex items-center gap-3">
+              <Award className="text-amber-500" /> مسار الترقي الفرعوني
+            </h2>
+            <div className="flex justify-between mb-12 relative">
+              <div className="absolute top-1/2 left-0 w-full h-1 bg-white/10 -translate-y-1/2 z-0"></div>
+              {badges.map((badge, i) => (
+                <div key={i} className="relative z-10 flex flex-col items-center">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-xl transition-all ${badge.status === 'locked' ? 'bg-slate-800 grayscale' : 'bg-amber-500 scale-110 shadow-amber-500/50'}`}>
+                    {badge.icon}
+                  </div>
+                  <p className={`text-[10px] mt-3 font-black uppercase tracking-tighter ${badge.status === 'locked' ? 'text-slate-600' : 'text-amber-500'}`}>{badge.name}</p>
                 </div>
-              </div>
-            ))}
-            <button 
-              onClick={() => router.push('/challenges')}
-              className="w-full py-4 text-amber-500 font-black border border-amber-500/20 rounded-2xl hover:bg-amber-500/5 transition-all"
-            >
-              عرض كافة التحديات
-            </button>
+              ))}
+            </div>
+
+            {/* الدروس الحالية والسابقة */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+               <div className="bg-white/5 p-6 rounded-[2rem] border-r-4 border-amber-500">
+                  <p className="text-[10px] font-black text-amber-500 mb-2 uppercase">الدرس الحالي</p>
+                  <h4 className="font-bold italic text-lg mb-4">فن المديح والترحيب المصري</h4>
+                  <button className="text-xs bg-amber-500 text-black px-4 py-2 rounded-full font-black">مواصلة</button>
+               </div>
+               <div className="bg-white/5 p-6 rounded-[2rem] opacity-60">
+                  <p className="text-[10px] font-black text-slate-500 mb-2 uppercase">آخر درس مكتمل</p>
+                  <h4 className="font-bold italic text-lg mb-4">مخارج حروف القاف والجيم</h4>
+                  <button className="text-xs border border-white/20 px-4 py-2 rounded-full font-black">مراجعة</button>
+               </div>
+            </div>
+          </div>
+
+          {/* ديوان التحديات السريعة */}
+          <div className="bg-white/5 border border-white/10 rounded-[3rem] p-10">
+             <h2 className="text-xl font-black italic mb-6">تحديات بانتظارك</h2>
+             <div className="space-y-4">
+                {["تحدي سرعة البديهة", "اختبار الألقاب الفرعونية"].map((t, i) => (
+                  <div key={i} className="flex justify-between items-center bg-white/5 p-5 rounded-2xl hover:bg-white/10 transition-all cursor-pointer">
+                    <span className="font-bold italic">{t}</span>
+                    <ChevronRight className="text-amber-500" />
+                  </div>
+                ))}
+             </div>
+          </div>
+        </div>
+
+        {/* العمود الثاني: النقاط والمتجر */}
+        <div className="space-y-8">
+          {/* حصالة النقاط */}
+          <div className="bg-gradient-to-br from-amber-500 to-amber-600 text-black rounded-[3rem] p-10 shadow-2xl relative overflow-hidden">
+             <div className="relative z-10">
+                <p className="font-black uppercase tracking-widest text-xs opacity-70">رصيدك من النقاط</p>
+                <h3 className="text-6xl font-black italic my-2">{points}</h3>
+                <p className="font-bold italic text-sm">تُعادل ٢٤٥ ريال في المتجر</p>
+             </div>
+             <Flame className="absolute -bottom-4 -right-4 opacity-20" size={120} />
+          </div>
+
+          {/* المتجر الملكي لاستبدال النقاط */}
+          <div className="bg-white/5 border border-white/10 rounded-[3rem] p-8 backdrop-blur-xl">
+             <h2 className="text-xl font-black italic mb-6 flex items-center gap-2">
+                <ShoppingBag size={20} className="text-amber-500" /> المقايضة الملكية
+             </h2>
+             <div className="space-y-4">
+                <div className="p-4 bg-white/5 rounded-2xl border border-white/5 flex justify-between items-center">
+                   <div>
+                      <p className="font-bold text-sm">وشاح الأكاديمية</p>
+                      <p className="text-[10px] text-amber-500">١٥٠٠ نقطة</p>
+                   </div>
+                   <button className="bg-white/10 px-3 py-1 rounded-lg text-[10px] font-black hover:bg-amber-500 hover:text-black transition-all">استبدال</button>
+                </div>
+                <div className="p-4 bg-white/5 rounded-2xl border border-white/5 flex justify-between items-center">
+                   <div>
+                      <p className="font-bold text-sm">جلسة خاصة مع الأستاذة عبلة</p>
+                      <p className="text-[10px] text-amber-500">٥٠٠٠ نقطة</p>
+                   </div>
+                   <button className="bg-white/10 px-3 py-1 rounded-lg text-[10px] font-black hover:bg-amber-500 hover:text-black transition-all">استبدال</button>
+                </div>
+             </div>
+             <p className="text-center text-[10px] text-slate-500 mt-6 italic">سيتم شحن الهدايا المادية لعنوانكِ الموثق</p>
           </div>
         </div>
 
