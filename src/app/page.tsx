@@ -1,110 +1,126 @@
 "use client";
-import React, { createContext, useState, useContext } from 'react';
-import { Crown, ArrowLeft, ArrowRight, Star, ShieldCheck, Globe } from 'lucide-react';
+import React, { useState } from 'react';
+import { Crown, GraduationCap, Trophy, Globe, UserCircle, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-// --- 1. LANGUAGE CONTEXT (سياق اللغة الملكي) ---
-const LanguageContext = createContext();
-
-export const LanguageProvider = ({ children }) => {
+export default function Home() {
+  const router = useRouter();
   const [lang, setLang] = useState('ar');
-  const translations = {
+
+  // محتوى اللغات بتفاصيل الأكاديمية الفريدة
+  const content = {
     ar: {
       badge: "الأكاديمية الأولى للهجة المصرية الراقية",
       title: "تعلمي المصرية",
       subtitle: "بفخامة القصور",
-      description: "حيث تلتقي عراقة 'المحروسة' برقي الاختيار. رحلة 'نوف' التعليمية تبدأ من هنا، لغةً وثقافةً وأسلوب حياة.",
-      cta: "ابدئي الرحلة الآن",
+      desc: "حيث تلتقي عراقة 'المحروسة' برقي الاختيار. رحلة 'نوف' التعليمية تبدأ من هنا، لغةً وثقافةً وأسلوب حياة يليق بكِ.",
+      btnTeachers: "رواق المعلمات",
+      btnChallenges: "ديوان التحديات",
+      login: "دخول الصفوة",
       stats: [
-        { label: "معلمة صفوة", value: "٥٠+" },
-        { label: "طالبة ملكية", value: "١٠٠٠+" },
-        { label: "ساعة تعليمية", value: "٥٠٠٠+" }
+        { label: 'معلمة صفوة', val: '+٥٠' },
+        { label: 'طالبة ملكية', val: '+١٠٠٠' },
+        { label: 'ساعة تعليمية', val: '+٥٠٠٠' },
+        { label: 'تحدي ذكي', val: '+١٠٠' }
       ],
       dir: "rtl"
     },
     en: {
       badge: "The Premier Academy for Royal Egyptian Dialect",
-      title: "Learn Egyptian",
+      title: "Master Egyptian",
       subtitle: "With Royal Elegance",
-      description: "Where the heritage of 'Al-Mahrousa' meets elite refinement. Nouf's educational journey starts here—language, culture, and lifestyle.",
-      cta: "Start Your Journey",
+      desc: "Where the heritage of 'Al-Mahrousa' meets elite refinement. Nouf's journey starts here—language, culture, and a lifestyle designed for you.",
+      btnTeachers: "Teachers Pavilion",
+      btnChallenges: "Challenges Diwan",
+      login: "Elite Login",
       stats: [
-        { label: "Elite Teachers", value: "50+" },
-        { label: "Royal Students", value: "1000+" },
-        { label: "Learning Hours", value: "5000+" }
+        { label: 'Elite Teachers', val: '50+' },
+        { label: 'Royal Students', val: '1000+' },
+        { label: 'Learning Hours', val: '5000+' },
+        { label: 'Smart Challenges', val: '100+' }
       ],
       dir: "ltr"
     }
   };
-  const t = translations[lang];
+
+  const t = content[lang];
+
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
-      <div dir={t.dir} className={lang === 'ar' ? 'font-sans' : 'font-serif'}>
-        {children}
+    <div dir={t.dir} className={`min-h-screen relative overflow-hidden transition-all duration-700 ${lang === 'ar' ? 'font-sans' : 'font-serif'}`}>
+      {/* زخرفة خلفية ملكية */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+        <Crown className={`absolute -top-20 ${t.dir === 'rtl' ? '-right-20' : '-left-20'} text-amber-500`} size={600} />
       </div>
-    </LanguageContext.Provider>
-  );
-};
 
-export const useLang = () => useContext(LanguageContext);
-
-// --- 2. HOME CONTENT ---
-const HomeContent = () => {
-  const { lang, setLang, t } = useLang();
-  const router = useRouter();
-
-  return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden bg-[#000814] text-white">
-      <button 
-        onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-        className="absolute top-10 right-10 z-50 bg-white/5 border border-white/10 px-4 py-2 rounded-2xl flex items-center gap-2 hover:bg-white/10 transition-all text-amber-500 font-bold"
-      >
-        <Globe size={18} />
-        <span className="text-xs uppercase tracking-widest">{lang === 'ar' ? 'English' : 'العربية'}</span>
-      </button>
-
-      <div className="relative z-10 max-w-5xl w-full text-center space-y-10 animate-in fade-in zoom-in duration-1000">
-        <div className="inline-flex items-center gap-3 bg-white/5 border border-amber-500/20 px-6 py-3 rounded-full backdrop-blur-md">
-          <Crown className="text-amber-500 animate-pulse" size={20} />
-          <span className="text-[10px] md:text-xs font-black tracking-[0.2em] uppercase text-amber-500">{t.badge}</span>
+      {/* الشريط العلوي */}
+      <nav className="relative z-10 flex justify-between items-center p-8 max-w-7xl mx-auto">
+        <div className="flex items-center gap-3">
+          <div className="bg-amber-500 p-2 rounded-lg text-black shadow-[0_0_15px_rgba(255,195,0,0.4)]">
+            <Crown size={30} />
+          </div>
+          <span className="text-2xl font-black italic tracking-tighter text-white uppercase">Yalla Masry</span>
         </div>
-
-        <div className="space-y-2">
-          <h1 className="text-6xl md:text-9xl font-black italic leading-none text-white tracking-tighter">{t.title}</h1>
-          <h2 className="text-5xl md:text-8xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-600 to-amber-400 py-2">{t.subtitle}</h2>
-        </div>
-
-        <p className="max-w-3xl mx-auto text-slate-400 text-lg md:text-2xl font-medium leading-relaxed italic opacity-80">{t.description}</p>
-
-        <div className="pt-6">
+        
+        <div className="flex items-center gap-6">
+          {/* مبدل اللغات الملكي */}
           <button 
-            onClick={() => router.push('/teachers')}
-            className="group relative bg-amber-500 text-[#000814] px-16 py-7 rounded-[2.5rem] font-black text-2xl md:text-3xl hover:scale-105 transition-all shadow-[0_20px_50px_rgba(245,158,11,0.3)] active:scale-95 overflow-hidden"
+            onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
+            className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-amber-500 hover:text-black transition-all text-amber-500 font-black text-xs"
           >
-            <span className="relative z-10 flex items-center gap-4">
-              {t.cta}
-              {lang === 'ar' ? <ArrowLeft /> : <ArrowRight />}
-            </span>
+            <Globe size={16} />
+            {lang === 'ar' ? 'ENGLISH' : 'العربية'}
+          </button>
+          
+          <button onClick={() => router.push('/login')} className="hidden md:flex items-center gap-2 hover:text-amber-500 transition-all font-bold text-sm">
+            <UserCircle size={20} /> {t.login}
           </button>
         </div>
+      </nav>
 
-        <div className="grid grid-cols-3 gap-4 pt-16 border-t border-white/5 max-w-3xl mx-auto">
-          {t.stats.map((stat, index) => (
-            <div key={index} className="space-y-1">
-              <p className="text-2xl md:text-4xl font-black text-white italic">{stat.value}</p>
-              <p className="text-[10px] md:text-xs text-slate-500 font-bold uppercase tracking-widest">{stat.label}</p>
+      {/* المحتوى الرئيسي */}
+      <main className="relative z-10 max-w-7xl mx-auto px-8 pt-20 pb-32">
+        <div className="max-w-3xl">
+          <div className="inline-block bg-amber-500/10 border border-amber-500/20 px-4 py-2 rounded-full mb-6">
+            <span className="text-amber-500 font-black tracking-[0.2em] text-[10px] uppercase">{t.badge}</span>
+          </div>
+          
+          <h1 className="text-6xl md:text-8xl font-black italic text-white leading-[1.1] mb-8">
+            {t.title} <br /> <span className="text-amber-500">{t.subtitle}</span>
+          </h1>
+          
+          <p className="text-xl text-slate-300 mb-12 leading-relaxed italic max-w-2xl opacity-80">
+            {t.desc}
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button 
+              onClick={() => router.push('/teachers')}
+              className="group bg-amber-500 text-black p-6 rounded-2xl flex items-center justify-between font-black text-xl hover:scale-[1.02] transition-all shadow-xl"
+            >
+              <span>{t.btnTeachers}</span>
+              {t.dir === 'rtl' ? <ArrowLeft /> : <ArrowRight />}
+            </button>
+            
+            <button 
+              onClick={() => router.push('/challenges')}
+              className="group bg-white/5 border border-white/10 p-6 rounded-2xl flex items-center justify-between font-black text-xl hover:bg-white/10 transition-all"
+            >
+              <span>{t.btnChallenges}</span>
+              <Trophy className="text-amber-500 group-hover:scale-110 transition-transform" />
+            </button>
+          </div>
+        </div>
+
+        {/* الإحصائيات */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 border-t border-white/5 pt-12">
+          {t.stats.map((stat, i) => (
+            <div key={i} className="space-y-1">
+              <p className="text-4xl font-black text-white italic">{stat.val}</p>
+              <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest opacity-60">{stat.label}</p>
             </div>
           ))}
         </div>
-      </div>
+      </main>
     </div>
-  );
-};
-
-export default function App() {
-  return (
-    <LanguageProvider>
-      <HomeContent />
-    </LanguageProvider>
   );
 }
