@@ -100,8 +100,14 @@ export default function BookingPage() {
               تأكيد طلب الانضمام
             </button>
           </div>
-
+        </div>
         </form>
       </div>
     </div>
   );
+}
+      
+
+
+        
+    
