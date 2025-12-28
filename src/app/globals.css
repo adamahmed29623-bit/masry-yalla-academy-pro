@@ -2,36 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+/* إعدادات الخلفية الملكية العميقة */
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 8, 20; /* الكحلي الملكي العميق */
-  --background-end-rgb: 0, 0, 0;    /* الأسود الفاخر */
+  --background-hex: #000814;
+  --royal-gold: #f59e0b;
 }
 
-/* تنسيق الخطوط والمظهر العام لضمان رقي العرض */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: white;
+  background-color: var(--background-hex) !important;
+  background-image: radial-gradient(circle at top right, rgba(245, 158, 11, 0.05), transparent),
+                    radial-gradient(circle at bottom left, rgba(245, 158, 11, 0.05), transparent);
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  font-family: 'Inter', sans-serif; /* أو أي خط تفضلينه لاحقاً */
+  font-family: 'Inter', sans-serif; /* أو أي خط تفضلينه */
 }
 
-/* تنعيم حركات الانتقال داخل الأكاديمية */
-* {
-  scroll-behavior: smooth;
-  box-sizing: border-box;
+/* تحسين مظهر النصوص الملكية */
+h1, h2, h3 {
+  letter-spacing: -0.02em;
 }
 
-/* لمسة ذهبية خاصة للروابط والأزرار */
-::selection {
-  background-color: #f59e0b; /* لون العنبر الذهبي */
-  color: #000;
+/* ضبط مظهر المدخلات في ديوان الحجز لتبدو شفافة وفخمة */
+input, textarea {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  border-radius: 1rem !important;
+  padding: 1rem !important;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--royal-gold) !important;
+  outline: none;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);
+}
+
+/* تأثير التوهج للذهب */
+.text-amber-500 {
+  color: var(--royal-gold) !important;
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+}
+
+/* زر الانطلاق */
+.bg-amber-500 {
+  background-color: var(--royal-gold) !important;
 }
